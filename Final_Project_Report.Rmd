@@ -1,0 +1,64 @@
+---
+title: "Final Project Data Analysis"
+author: "Lauren Vanasse"
+date: "2024-02-06"
+output: pdf_document
+params:
+  production: TRUE
+---
+
+```{r, set-chunk-opts, echo = FALSE, eval = params$production}
+library(knitr)
+library(readr)
+opts_chunk$set(
+  echo = FALSE, warning = FALSE, message = FALSE
+)
+```
+
+# Introduction to the Data and Analysis Objectives
+
+I will be using data from my thesis project on the impact of transportation vulnerability on diabetic foot ulcer related amputations as a health outcome. The data comes from the Healthcare Cost and Utilization project from the years 2016-2019 and consists of patient level billing data selected for diabetic foot ulcer related amputations. The patient data was then aggregated to the ZIP code level and restricted to the state of Georgia. For the sake of this project, I have further restricted the spatial domain to that of major Metropolitan areas in the state of Georgia (Atlanta and Savannah). Transportation related variables such as distance to closest transit stops, expense spent on public transit per capita, and the percentage of workers who use public transportation to go to work are included at the ZIP Code level and have been acquired from open access sources. This project will examine the effects of these transportation metrics on the risk of diabetic foot ulcers related amputations, adjusting for socioeconomic (SES) factors, at the ZIP Code level within the Metropolitan Georgia area using spatio-temporal modeling techniques. 
+
+```{r DataImport}
+load("data/shape_zcta_restrict.RData")
+```
+
+# Descriptive Table of Transportation Variables
+
+```{r table1, echo=FALSE}
+table_one <- readRDS(
+  file = here::here("output/table_one.rds")
+)
+table_one
+```
+
+\
+
+For the data we see above, the median poverty status amongst all ZIP codes in Atlanta and Savannah is `r median(shape_zcta_restrict$pct_poverty, na.rm=TRUE)` and all ZIP codes were classified as either above or below this threshold. A higher number of this variable indicates that more people in this ZIP code are at or below the poverty line. This table aims to show the differences in transportation metrics when dichotomized by the poverty status. For example, we notice that for ZIP codes below the median poverty status, the per capita expense on public transportation is higher than when above the median poverty status. This indicates that ZIP codes with a larger percentage of population below the poverty line, have lower per capita expense on public transportation. In addition, for ZIP codes below the median percent poverty status, the distance to the closest transit stop increases, which could be due ZIP codes that are more suburban. The percentage of workers who use public transportation to get to work as well as the percentage of households without vehicles are much lower in ZIP codes below the median poverty level which could also indicate that wealthier ZIP codes have more access to personal vehicles and are less likely to use public transportation to get to work. Because of these relationships we know that it is essential to stratify our models on SES factors in order to adjust for the modifications that these variables may have on amputation outcomes.
+
+# Figures Depicting the Relationship between Transportation and Amputation Outcomes Stratified by Socioeconomic Variables
+
+```{r,echo=FALSE, warning=FALSE, out.height="4.1in", fig.align='center'}
+knitr::include_graphics(
+  here::here("output/finalfig1.png")
+)
+```
+
+```{r, echo=FALSE, warning=FALSE, out.height="4.1in", fig.align='center'}
+knitr::include_graphics(
+  here::here("output/finalfig2.png")
+)
+```
+
+```{r, echo=FALSE, warning=FALSE, out.height="4.1in", fig.align='center'}
+knitr::include_graphics(
+  here::here("output/finalfig3.png")
+)
+```  
+  
+\
+
+Our SES variables, percent poverty status and percent of households without a vehicle, were divided into quartiles and were used to stratify the effects of each transportation variable. This adjustment allows us to compare ZIP codes with similar SES status while still examining the effects of our transportation variables on the risk of DFU related amputation outcomes. In all three figures, we see that there is an increase in risk of major and minor DFU related amputations as the quartiles increase for both SES modifiers. The first plot depicts the relationship of distance to transit stop and the corresponding risk of amputation. From this plot we understand that for only the fourth quartile of `% Poverty`, or for ZIP codes with the highest poverty status, the risk ratio is greater than 1 indicating that larger distances to transit stops have a harmful effect on major and minor amputation outcomes. In the second plot, the third and fourth quartile for `% No Vehicle` and the second, third, and fourth quartile for `% Poverty` have risk ratios greater than 1. This again indicates that having a higher percentage of workers who use public transportation to get to work has a harmful effect on DFU related amputations. Lastly, the third plot depicts all quartiles of both SES variables below the threshold of 1. This indicates that no matter the percentage of households that have no vehicle or what the poverty status is for a ZIP code, paying more for public transportation per capita has a protective effect on DFU related amputation outcomes.
+
+
+ 
