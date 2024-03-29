@@ -7,12 +7,15 @@ here::i_am(
 load("data/shape_zcta_restrict.RData")
 
 # load in packages
+# Run the following install statement if you need to install INLA
+#install.packages("INLA",repos=c(getOption("repos"),INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE)
+library(INLA)
 library(sf)
 library(tidyverse)
 library(ggpubr)
 
 # read in map
-s19_g <- INLA::inla.read.graph(filename = "data/s19_adj")
+s19_g <- inla.read.graph(filename = "data/s19_adj")
 
 # Create a model that depicts how transportation variables are affected by the 
 # quantiled SES effect modifiers
@@ -26,7 +29,7 @@ mainfigure_func <- function(Outcome, covar1, modifier1, modifier2){
   # covar1
   formula1 <- reformulate(termlabels = covar1, 
                           response = Outcome)
-  model1 <- INLA::inla(update(formula1, .~.  +
+  model1 <- inla(update(formula1, .~.  +
                           f(Index, model = "besag", graph = s19_g, group=TimeIndex, 
                             control.group = list(model = "exchangeable")) +
                           f(TimeIndex)),
@@ -39,7 +42,7 @@ mainfigure_func <- function(Outcome, covar1, modifier1, modifier2){
   # modifier1*covar1 - covar1
   formula2 <- reformulate(termlabels = c(paste0(modifier1,":", covar1), paste0("-",covar1)), 
                           response = Outcome)
-  model2 <- INLA::inla(update(formula2, .~.  +
+  model2 <- inla(update(formula2, .~.  +
                           f(Index, model = "besag", graph = s19_g, group=TimeIndex, 
                             control.group = list(model = "exchangeable")) +
                           f(TimeIndex)),
@@ -52,7 +55,7 @@ mainfigure_func <- function(Outcome, covar1, modifier1, modifier2){
   # modifier2*covar1 - covar1
   formula3 <- reformulate(termlabels = c(paste0(modifier2,":", covar1), paste0("-",covar1)), 
                           response = Outcome)
-  model3 <- INLA::inla(update(formula3, .~.  +
+  model3 <- inla(update(formula3, .~.  +
                           f(Index, model = "besag", graph = s19_g, group=TimeIndex, 
                             control.group = list(model = "exchangeable")) +
                           f(TimeIndex)),
