@@ -1,5 +1,7 @@
 # Code Description
 
+**Please Note** If you need to install the package `INLA` on your device, please follow the instructions in `code/02_make_figures.R` to aid in the install process. These lines of code have been commented out to decrease run time in case INLA has already been installed on your device.
+
 `code/01_create_table.R`
 
 - load clean data from `data/` folder
