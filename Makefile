@@ -13,3 +13,7 @@ output/table_one.rds: code/01_create_table.R
 .PHONY: clean
 clean:
 	rm -f output/*.rds && rm -f output/*.png && rm -f .finalfigs && rm -f Final_Project_Report.pdf 
+	
+.PHONY: install
+install:
+	Rscript -e "renv::restore(prompt=FALSE)"
