@@ -8,8 +8,8 @@ load("data/shape_zcta_restrict.RData")
 
 ######## INSTALLING INLA #######
 # Un-comment and run the following 2 lines if you need to install INLA
-#options(timeout=300)
-#install.packages("INLA",repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE)
+# options(timeout=300)
+# install.packages("INLA",repos=c(getOption("repos"), INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE)
 
 # Load in the rest of the libraries
 library(INLA)

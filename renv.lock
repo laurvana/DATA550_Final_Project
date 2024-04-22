@@ -20,29 +20,6 @@
       ],
       "Hash": "b2866e62bab9378c3cc9476a1954226b"
     },
-    "INLA": {
-      "Package": "INLA",
-      "Version": "24.03.29",
-      "Source": "unknown",
-      "Requirements": [
-        "Matrix",
-        "MatrixModels",
-        "R",
-        "fmesher",
-        "grDevices",
-        "graphics",
-        "lifecycle",
-        "methods",
-        "parallel",
-        "rlang",
-        "sp",
-        "splines",
-        "stats",
-        "utils",
-        "withr"
-      ],
-      "Hash": "85cd4b6094e08b03637771c1f9e57bca"
-    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-22",
