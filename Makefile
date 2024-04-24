@@ -24,10 +24,10 @@ PROJECTFILES = Final_Project_Report.Rmd code/01_create_table.R code/02_make_figu
 RENVFILES = renv.lock renv/activate.R renv/settings.json
 
 # rule to build an image
-project_image: Dockerfile $(PROJECTFILES) $(RENVFILES)
-	docker build -t project_image .
+project_image_inla: Dockerfile $(PROJECTFILES) $(RENVFILES)
+	docker build -t project_image_inla .
 	touch $@
 
 # Rule to build the final report automatically in container
 report/Final_Project_Report.pdf: 
-	docker run -v "$$(pwd)"/report:/project/report project_image
+	docker run -v "$$(pwd)"/report:/project/report project_image_inla

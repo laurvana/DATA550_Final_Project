@@ -11,8 +11,6 @@
 - load map from `data/` folder
 - save final figure forest plots 1-3 in `output/` folder
 
-**Please Note** If you need to install the package `INLA` on your device, please follow the instructions in `code/02_make_figures.R` to aid in the install process. These lines of code have been commented out to decrease run time in case INLA has already been installed on your device.
-
 `code/03_render_report.R`
 
 - render `code/Final_Project_Report.Rmd` 
@@ -42,14 +40,14 @@ In order to generate the final report outside of a container please run the foll
 
 # How to build the Docker Image
 
-by running the following command, `make project_image`, the docker image "project_image" will be built using the `Dockerfile` saved in this repository.
+by running the following command, `make project_image_inla`, the docker image "project_image_inla" will be built using the `Dockerfile` saved in this repository.
 
 # Generating the Final Report with Docker 
 
-Please find the link to the project_image on DockerHub here:
+Please find the link to the project_image_inla on DockerHub here: https://hub.docker.com/r/laurvana/project_image_inla
 
 With this image, you can generate the `Final_Project_Report.pdf` using the following make command:
 
  `make report/Final_Project_Report.pdf`
 
-This command builds the final report automatically by running the image called "project_image". The final report should appear in the `report` folder located on your local computer. Recall that if you are using git bash on Windows, you will need an extra /, i.e., "/$(pwd)" when mounting a directory within the `report/Final_Project_Report.pdf` make command.
+This command builds the final report automatically by running the image called "project_image_inla". The final report should appear in the `report` folder located on your local computer. Recall that if you are using git bash on Windows, you will need an extra /, i.e., "/$(pwd)" when mounting a directory within the `report/Final_Project_Report.pdf` make command.
