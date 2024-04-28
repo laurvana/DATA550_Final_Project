@@ -13,13 +13,14 @@ output/table_one.rds: code/01_create_table.R
 
 .PHONY: clean
 clean:
-	rm -f output/*.rds && rm -f output/*.png && rm -f .finalfigs && rm -f Final_Project_Report.pdf 
+	rm -f output/*.rds && rm -f output/*.png && rm -f .finalfigs && rm -f Final_Project_Report.pdf && rm -f report/*.pdf
 	
 .PHONY: install
 install:
 	Rscript -e "renv::restore(prompt=FALSE)"
 	
 # DOCKER-ASSOCIATED RULES (run on local machine)
+
 PROJECTFILES = Final_Project_Report.Rmd code/01_create_table.R code/02_make_figures.R code/03_render_report.R Makefile
 RENVFILES = renv.lock renv/activate.R renv/settings.json
 

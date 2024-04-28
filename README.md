@@ -26,7 +26,7 @@
 - includes brief description of figures
 - save pdf version of report in main folder
 
-In order to generate the final report outside of a container please run the following command in your terminal: `make Final_Project_Report.pdf`. This command should generate the table 1 and three associated figures as well as their interpretations into a final pdf document. Please read below to generate the final report within a docker container.
+In order to generate the final report OUTSIDE (not advised) of a container please run the following command in your terminal: `make Final_Project_Report.pdf`. This command should generate the table 1 and three associated figures as well as their interpretations into a final pdf document. Please read below to generate the final report WITHIN (advised) a docker container.
 
 # Make PHONY Rule Instructions 
 
