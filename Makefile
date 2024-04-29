@@ -31,4 +31,4 @@ project_image_inla: Dockerfile $(PROJECTFILES) $(RENVFILES)
 
 # Rule to build the final report automatically in container
 report/Final_Project_Report.pdf: 
-	docker run -v "$$(pwd)"/report:/project/report project_image_inla
+	docker run -v "$$(pwd)"/report:/project/report laurvana/project_image_inla:latest
